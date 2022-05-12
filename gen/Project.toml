@@ -1,0 +1,3 @@
+[deps]
+CXSparse_jll = "c77e7b6a-7cf9-58ed-a396-e1da12b05d87"
+Clang = "40e3b903-d033-50b4-a0cc-940c62c95e31"
