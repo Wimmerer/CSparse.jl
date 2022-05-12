@@ -3,6 +3,9 @@ uuid = "134123d4-e80b-4fbf-a2e8-1c618a79accd"
 authors = ["Ray Kimmerer <kimmerer@mit.edu> and contributors"]
 version = "0.1.0"
 
+[deps]
+CXSparse_jll = "c77e7b6a-7cf9-58ed-a396-e1da12b05d87"
+
 [compat]
 julia = "1"
 
