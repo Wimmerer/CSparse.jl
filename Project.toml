@@ -7,7 +7,7 @@ version = "0.1.0"
 CXSparse_jll = "c77e7b6a-7cf9-58ed-a396-e1da12b05d87"
 
 [compat]
-julia = "1"
+julia = "1.6"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
