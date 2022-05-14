@@ -23,13 +23,12 @@ for target in JLLEnvs.JLL_ENV_TRIPLES
     options["general"]["output_file_path"] = joinpath(@__DIR__, "..", "lib", "$target.jl")
 
     args = get_default_args(target)
+    push!(args, "--include=$ssconfig_h")
     push!(args, "-I$include_dir")
     if startswith(target, "x86_64") || startswith(target, "powerpc64le") || startswith(target, "aarch64")
         push!(args, "-DSUN64 -DLONGBLAS='long long' -D'SuiteSparse_long_max=9223372036854775801'")
     end
-
-    header_files = [cs_h, ssconfig_h]
-
+    header_files = [cs_h]
     ctx = create_context(header_files, args, options)
 
     build!(ctx)
