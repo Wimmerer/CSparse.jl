@@ -673,18 +673,18 @@ struct cs_ci_sparse
     n::Cint
     p::Ptr{Cint}
     i::Ptr{Cint}
-    x::Ptr{ComplexF32}
+    x::Ptr{ComplexF64}
     nz::Cint
 end
 
 const cs_ci = cs_ci_sparse
 
 function cs_ci_add(A, B, alpha, beta)
-    @ccall libcxsparse.cs_ci_add(A::Ptr{cs_ci}, B::Ptr{cs_ci}, alpha::ComplexF32, beta::ComplexF32)::Ptr{cs_ci}
+    @ccall libcxsparse.cs_ci_add(A::Ptr{cs_ci}, B::Ptr{cs_ci}, alpha::ComplexF64, beta::ComplexF64)::Ptr{cs_ci}
 end
 
 function cs_ci_cholsol(order, A, b)
-    @ccall libcxsparse.cs_ci_cholsol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_cholsol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_dupl(A)
@@ -692,15 +692,15 @@ function cs_ci_dupl(A)
 end
 
 function cs_ci_entry(T, i, j, x)
-    @ccall libcxsparse.cs_ci_entry(T::Ptr{cs_ci}, i::Cint, j::Cint, x::ComplexF32)::Cint
+    @ccall libcxsparse.cs_ci_entry(T::Ptr{cs_ci}, i::Cint, j::Cint, x::ComplexF64)::Cint
 end
 
 function cs_ci_lusol(order, A, b, tol)
-    @ccall libcxsparse.cs_ci_lusol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF32}, tol::Cdouble)::Cint
+    @ccall libcxsparse.cs_ci_lusol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF64}, tol::Cdouble)::Cint
 end
 
 function cs_ci_gaxpy(A, x, y)
-    @ccall libcxsparse.cs_ci_gaxpy(A::Ptr{cs_ci}, x::Ptr{ComplexF32}, y::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_gaxpy(A::Ptr{cs_ci}, x::Ptr{ComplexF64}, y::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_multiply(A, B)
@@ -708,7 +708,7 @@ function cs_ci_multiply(A, B)
 end
 
 function cs_ci_qrsol(order, A, b)
-    @ccall libcxsparse.cs_ci_qrsol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_qrsol(order::Cint, A::Ptr{cs_ci}, b::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_transpose(A, values)
@@ -817,19 +817,19 @@ function cs_ci_dropzeros(A)
 end
 
 function cs_ci_happly(V, i, beta, x)
-    @ccall libcxsparse.cs_ci_happly(V::Ptr{cs_ci}, i::Cint, beta::Cdouble, x::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_happly(V::Ptr{cs_ci}, i::Cint, beta::Cdouble, x::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_ipvec(p, b, x, n)
-    @ccall libcxsparse.cs_ci_ipvec(p::Ptr{Cint}, b::Ptr{ComplexF32}, x::Ptr{ComplexF32}, n::Cint)::Cint
+    @ccall libcxsparse.cs_ci_ipvec(p::Ptr{Cint}, b::Ptr{ComplexF64}, x::Ptr{ComplexF64}, n::Cint)::Cint
 end
 
 function cs_ci_lsolve(L, x)
-    @ccall libcxsparse.cs_ci_lsolve(L::Ptr{cs_ci}, x::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_lsolve(L::Ptr{cs_ci}, x::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_ltsolve(L, x)
-    @ccall libcxsparse.cs_ci_ltsolve(L::Ptr{cs_ci}, x::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_ltsolve(L::Ptr{cs_ci}, x::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_lu(A, S, tol)
@@ -845,7 +845,7 @@ function cs_ci_pinv(p, n)
 end
 
 function cs_ci_pvec(p, b, x, n)
-    @ccall libcxsparse.cs_ci_pvec(p::Ptr{Cint}, b::Ptr{ComplexF32}, x::Ptr{ComplexF32}, n::Cint)::Cint
+    @ccall libcxsparse.cs_ci_pvec(p::Ptr{Cint}, b::Ptr{ComplexF64}, x::Ptr{ComplexF64}, n::Cint)::Cint
 end
 
 function cs_ci_qr(A, S)
@@ -865,11 +865,11 @@ function cs_ci_symperm(A, pinv, values)
 end
 
 function cs_ci_usolve(U, x)
-    @ccall libcxsparse.cs_ci_usolve(U::Ptr{cs_ci}, x::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_usolve(U::Ptr{cs_ci}, x::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_utsolve(U, x)
-    @ccall libcxsparse.cs_ci_utsolve(U::Ptr{cs_ci}, x::Ptr{ComplexF32})::Cint
+    @ccall libcxsparse.cs_ci_utsolve(U::Ptr{cs_ci}, x::Ptr{ComplexF64})::Cint
 end
 
 function cs_ci_updown(L, sigma, C, parent)
@@ -909,7 +909,7 @@ function cs_ci_fkeep(A, fkeep, other)
 end
 
 function cs_ci_house(x, beta, n)
-    @ccall libcxsparse.cs_ci_house(x::Ptr{ComplexF32}, beta::Ptr{Cdouble}, n::Cint)::ComplexF32
+    @ccall libcxsparse.cs_ci_house(x::Ptr{ComplexF64}, beta::Ptr{Cdouble}, n::Cint)::ComplexF64
 end
 
 function cs_ci_maxtrans(A, seed)
@@ -925,7 +925,7 @@ function cs_ci_scc(A)
 end
 
 function cs_ci_scatter(A, j, beta, w, x, mark, C, nz)
-    @ccall libcxsparse.cs_ci_scatter(A::Ptr{cs_ci}, j::Cint, beta::ComplexF32, w::Ptr{Cint}, x::Ptr{ComplexF32}, mark::Cint, C::Ptr{cs_ci}, nz::Cint)::Cint
+    @ccall libcxsparse.cs_ci_scatter(A::Ptr{cs_ci}, j::Cint, beta::ComplexF64, w::Ptr{Cint}, x::Ptr{ComplexF64}, mark::Cint, C::Ptr{cs_ci}, nz::Cint)::Cint
 end
 
 function cs_ci_tdfs(j, k, head, next, post, stack)
@@ -941,7 +941,7 @@ function cs_ci_reach(G, B, k, xi, pinv)
 end
 
 function cs_ci_spsolve(L, B, k, xi, x, pinv, lo)
-    @ccall libcxsparse.cs_ci_spsolve(L::Ptr{cs_ci}, B::Ptr{cs_ci}, k::Cint, xi::Ptr{Cint}, x::Ptr{ComplexF32}, pinv::Ptr{Cint}, lo::Cint)::Cint
+    @ccall libcxsparse.cs_ci_spsolve(L::Ptr{cs_ci}, B::Ptr{cs_ci}, k::Cint, xi::Ptr{Cint}, x::Ptr{ComplexF64}, pinv::Ptr{Cint}, lo::Cint)::Cint
 end
 
 function cs_ci_ereach(A, k, parent, s, w)
@@ -978,18 +978,18 @@ struct cs_cl_sparse
     n::Clong
     p::Ptr{Clong}
     i::Ptr{Clong}
-    x::Ptr{ComplexF32}
+    x::Ptr{ComplexF64}
     nz::Clong
 end
 
 const cs_cl = cs_cl_sparse
 
 function cs_cl_add(A, B, alpha, beta)
-    @ccall libcxsparse.cs_cl_add(A::Ptr{cs_cl}, B::Ptr{cs_cl}, alpha::ComplexF32, beta::ComplexF32)::Ptr{cs_cl}
+    @ccall libcxsparse.cs_cl_add(A::Ptr{cs_cl}, B::Ptr{cs_cl}, alpha::ComplexF64, beta::ComplexF64)::Ptr{cs_cl}
 end
 
 function cs_cl_cholsol(order, A, b)
-    @ccall libcxsparse.cs_cl_cholsol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_cholsol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_dupl(A)
@@ -997,15 +997,15 @@ function cs_cl_dupl(A)
 end
 
 function cs_cl_entry(T, i, j, x)
-    @ccall libcxsparse.cs_cl_entry(T::Ptr{cs_cl}, i::Clong, j::Clong, x::ComplexF32)::Clong
+    @ccall libcxsparse.cs_cl_entry(T::Ptr{cs_cl}, i::Clong, j::Clong, x::ComplexF64)::Clong
 end
 
 function cs_cl_lusol(order, A, b, tol)
-    @ccall libcxsparse.cs_cl_lusol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF32}, tol::Cdouble)::Clong
+    @ccall libcxsparse.cs_cl_lusol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF64}, tol::Cdouble)::Clong
 end
 
 function cs_cl_gaxpy(A, x, y)
-    @ccall libcxsparse.cs_cl_gaxpy(A::Ptr{cs_cl}, x::Ptr{ComplexF32}, y::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_gaxpy(A::Ptr{cs_cl}, x::Ptr{ComplexF64}, y::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_multiply(A, B)
@@ -1013,7 +1013,7 @@ function cs_cl_multiply(A, B)
 end
 
 function cs_cl_qrsol(order, A, b)
-    @ccall libcxsparse.cs_cl_qrsol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_qrsol(order::Clong, A::Ptr{cs_cl}, b::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_transpose(A, values)
@@ -1122,19 +1122,19 @@ function cs_cl_dropzeros(A)
 end
 
 function cs_cl_happly(V, i, beta, x)
-    @ccall libcxsparse.cs_cl_happly(V::Ptr{cs_cl}, i::Clong, beta::Cdouble, x::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_happly(V::Ptr{cs_cl}, i::Clong, beta::Cdouble, x::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_ipvec(p, b, x, n)
-    @ccall libcxsparse.cs_cl_ipvec(p::Ptr{Clong}, b::Ptr{ComplexF32}, x::Ptr{ComplexF32}, n::Clong)::Clong
+    @ccall libcxsparse.cs_cl_ipvec(p::Ptr{Clong}, b::Ptr{ComplexF64}, x::Ptr{ComplexF64}, n::Clong)::Clong
 end
 
 function cs_cl_lsolve(L, x)
-    @ccall libcxsparse.cs_cl_lsolve(L::Ptr{cs_cl}, x::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_lsolve(L::Ptr{cs_cl}, x::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_ltsolve(L, x)
-    @ccall libcxsparse.cs_cl_ltsolve(L::Ptr{cs_cl}, x::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_ltsolve(L::Ptr{cs_cl}, x::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_lu(A, S, tol)
@@ -1150,7 +1150,7 @@ function cs_cl_pinv(p, n)
 end
 
 function cs_cl_pvec(p, b, x, n)
-    @ccall libcxsparse.cs_cl_pvec(p::Ptr{Clong}, b::Ptr{ComplexF32}, x::Ptr{ComplexF32}, n::Clong)::Clong
+    @ccall libcxsparse.cs_cl_pvec(p::Ptr{Clong}, b::Ptr{ComplexF64}, x::Ptr{ComplexF64}, n::Clong)::Clong
 end
 
 function cs_cl_qr(A, S)
@@ -1170,11 +1170,11 @@ function cs_cl_symperm(A, pinv, values)
 end
 
 function cs_cl_usolve(U, x)
-    @ccall libcxsparse.cs_cl_usolve(U::Ptr{cs_cl}, x::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_usolve(U::Ptr{cs_cl}, x::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_utsolve(U, x)
-    @ccall libcxsparse.cs_cl_utsolve(U::Ptr{cs_cl}, x::Ptr{ComplexF32})::Clong
+    @ccall libcxsparse.cs_cl_utsolve(U::Ptr{cs_cl}, x::Ptr{ComplexF64})::Clong
 end
 
 function cs_cl_updown(L, sigma, C, parent)
@@ -1214,7 +1214,7 @@ function cs_cl_fkeep(A, fkeep, other)
 end
 
 function cs_cl_house(x, beta, n)
-    @ccall libcxsparse.cs_cl_house(x::Ptr{ComplexF32}, beta::Ptr{Cdouble}, n::Clong)::ComplexF32
+    @ccall libcxsparse.cs_cl_house(x::Ptr{ComplexF64}, beta::Ptr{Cdouble}, n::Clong)::ComplexF64
 end
 
 function cs_cl_maxtrans(A, seed)
@@ -1230,7 +1230,7 @@ function cs_cl_scc(A)
 end
 
 function cs_cl_scatter(A, j, beta, w, x, mark, C, nz)
-    @ccall libcxsparse.cs_cl_scatter(A::Ptr{cs_cl}, j::Clong, beta::ComplexF32, w::Ptr{Clong}, x::Ptr{ComplexF32}, mark::Clong, C::Ptr{cs_cl}, nz::Clong)::Clong
+    @ccall libcxsparse.cs_cl_scatter(A::Ptr{cs_cl}, j::Clong, beta::ComplexF64, w::Ptr{Clong}, x::Ptr{ComplexF64}, mark::Clong, C::Ptr{cs_cl}, nz::Clong)::Clong
 end
 
 function cs_cl_tdfs(j, k, head, next, post, stack)
@@ -1246,7 +1246,7 @@ function cs_cl_reach(G, B, k, xi, pinv)
 end
 
 function cs_cl_spsolve(L, B, k, xi, x, pinv, lo)
-    @ccall libcxsparse.cs_cl_spsolve(L::Ptr{cs_cl}, B::Ptr{cs_cl}, k::Clong, xi::Ptr{Clong}, x::Ptr{ComplexF32}, pinv::Ptr{Clong}, lo::Clong)::Clong
+    @ccall libcxsparse.cs_cl_spsolve(L::Ptr{cs_cl}, B::Ptr{cs_cl}, k::Clong, xi::Ptr{Clong}, x::Ptr{ComplexF64}, pinv::Ptr{Clong}, lo::Clong)::Clong
 end
 
 function cs_cl_ereach(A, k, parent, s, w)
@@ -1295,7 +1295,7 @@ end
 
 const SuiteSparse_long = Clong
 
-const SuiteSparse_long_max = LONG_MAX
+const SuiteSparse_long_max = typemax(SuiteSparse_long)
 
 const SuiteSparse_long_idd = "ld"
 
@@ -1323,155 +1323,12 @@ const CS_DATE = "Sept 12, 2017"
 
 const CS_COPYRIGHT = "Copyright (c) Timothy A. Davis, 2006-2016"
 
-const cs_long_t = SuiteSparse_long
-
-const cs_long_t_id = SuiteSparse_long_id
-
-const cs_long_t_max = SuiteSparse_long_max
-
 const CS_INT = Cint
 
-const CS_INT_MAX = INT_MAX
+const CS_INT_MAX = typemax(CS_INT)
 
 const CS_ID = "%d"
 
 const CS_ENTRY = Float64
 
 const cs = cs_di
-
-const cs_add = CS_NAME(_add)
-
-const cs_cholsol = CS_NAME(_cholsol)
-
-const cs_dupl = CS_NAME(_dupl)
-
-const cs_entry = CS_NAME(_entry)
-
-const cs_lusol = CS_NAME(_lusol)
-
-const cs_gaxpy = CS_NAME(_gaxpy)
-
-const cs_multiply = CS_NAME(_multiply)
-
-const cs_qrsol = CS_NAME(_qrsol)
-
-const cs_transpose = CS_NAME(_transpose)
-
-const cs_compress = CS_NAME(_compress)
-
-const cs_norm = CS_NAME(_norm)
-
-const cs_print = CS_NAME(_print)
-
-const cs_load = CS_NAME(_load)
-
-const cs_calloc = CS_NAME(_calloc)
-
-const cs_free = CS_NAME(_free)
-
-const cs_realloc = CS_NAME(_realloc)
-
-const cs_spalloc = CS_NAME(_spalloc)
-
-const cs_spfree = CS_NAME(_spfree)
-
-const cs_sprealloc = CS_NAME(_sprealloc)
-
-const cs_malloc = CS_NAME(_malloc)
-
-const css = CS_NAME(s)
-
-const csn = CS_NAME(n)
-
-const csd = CS_NAME(d)
-
-const cs_amd = CS_NAME(_amd)
-
-const cs_chol = CS_NAME(_chol)
-
-const cs_dmperm = CS_NAME(_dmperm)
-
-const cs_droptol = CS_NAME(_droptol)
-
-const cs_dropzeros = CS_NAME(_dropzeros)
-
-const cs_happly = CS_NAME(_happly)
-
-const cs_ipvec = CS_NAME(_ipvec)
-
-const cs_lsolve = CS_NAME(_lsolve)
-
-const cs_ltsolve = CS_NAME(_ltsolve)
-
-const cs_lu = CS_NAME(_lu)
-
-const cs_permute = CS_NAME(_permute)
-
-const cs_pinv = CS_NAME(_pinv)
-
-const cs_pvec = CS_NAME(_pvec)
-
-const cs_qr = CS_NAME(_qr)
-
-const cs_schol = CS_NAME(_schol)
-
-const cs_sqr = CS_NAME(_sqr)
-
-const cs_symperm = CS_NAME(_symperm)
-
-const cs_usolve = CS_NAME(_usolve)
-
-const cs_utsolve = CS_NAME(_utsolve)
-
-const cs_updown = CS_NAME(_updown)
-
-const cs_sfree = CS_NAME(_sfree)
-
-const cs_nfree = CS_NAME(_nfree)
-
-const cs_dfree = CS_NAME(_dfree)
-
-const cs_counts = CS_NAME(_counts)
-
-const cs_cumsum = CS_NAME(_cumsum)
-
-const cs_dfs = CS_NAME(_dfs)
-
-const cs_etree = CS_NAME(_etree)
-
-const cs_fkeep = CS_NAME(_fkeep)
-
-const cs_house = CS_NAME(_house)
-
-const cs_invmatch = CS_NAME(_invmatch)
-
-const cs_maxtrans = CS_NAME(_maxtrans)
-
-const cs_post = CS_NAME(_post)
-
-const cs_scc = CS_NAME(_scc)
-
-const cs_scatter = CS_NAME(_scatter)
-
-const cs_tdfs = CS_NAME(_tdfs)
-
-const cs_reach = CS_NAME(_reach)
-
-const cs_spsolve = CS_NAME(_spsolve)
-
-const cs_ereach = CS_NAME(_ereach)
-
-const cs_randperm = CS_NAME(_randperm)
-
-const cs_leaf = CS_NAME(_leaf)
-
-const cs_dalloc = CS_NAME(_dalloc)
-
-const cs_done = CS_NAME(_done)
-
-const cs_idone = CS_NAME(_idone)
-
-const cs_ndone = CS_NAME(_ndone)
-
-const cs_ddone = CS_NAME(_ddone)
-

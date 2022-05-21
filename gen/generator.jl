@@ -15,21 +15,11 @@ cs_h = joinpath(include_dir, "cs.h")
 ssconfig_h = joinpath(@__DIR__, "SuiteSparse_config.h")
 # load common option
 options = load_options(joinpath(@__DIR__, "generator.toml"))
-
+options["general"]["output_file_path"] = joinpath(@__DIR__, "..", "lib", "libcsparse.jl")
 # run generator for all platforms
-for target in JLLEnvs.JLL_ENV_TRIPLES
-    @info "processing $target"
-
-    options["general"]["output_file_path"] = joinpath(@__DIR__, "..", "lib", "$target.jl")
-
-    args = get_default_args(target)
-    push!(args, "--include=$ssconfig_h")
-    push!(args, "-I$include_dir")
-    if startswith(target, "x86_64") || startswith(target, "powerpc64le") || startswith(target, "aarch64")
-        push!(args, "-DSUN64 -DLONGBLAS='long long' -D'SuiteSparse_long_max=9223372036854775801'")
-    end
-    header_files = [cs_h]
-    ctx = create_context(header_files, args, options)
-
-    build!(ctx)
-end
+args = get_default_args()
+push!(args, "--include=$ssconfig_h")
+push!(args, "-I$include_dir")
+header_files = [cs_h]
+ctx = create_context(header_files, args, options)
+build!(ctx)
